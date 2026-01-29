@@ -25,12 +25,12 @@ const AboutSection = ({
   className,
 }: AboutSectionProps) => {
   return (
-    <section className={cn("py-32 bg-background dark:bg-background/90", className)}>
+    <section className={cn("py-4 bg-background dark:bg-background/90", className)}>
       <div className="container grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
         {/* Left: Image */}
         <div className="relative w-full h-80 sm:h-[400px] lg:h-[500px]">
           <Image
-            src="/aboutsection.jpg" 
+            src="/about2.jpg" 
             alt="About SkillBridge"
             fill
             className="rounded-xl object-cover shadow-lg"
@@ -39,7 +39,7 @@ const AboutSection = ({
 
         {/* Right: Text content */}
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left gap-6">
-          <h2 className="text-4xl font-bold text-foreground lg:text-5xl">{heading}</h2>
+          <h2 className="text-2xl font-bold text-foreground lg:text-5xl">{heading}</h2>
           <p className="max-w-xl text-muted-foreground lg:text-lg">{description}</p>
 
           {/* Features */}
@@ -51,7 +51,7 @@ const AboutSection = ({
               >
                 <CardHeader className="flex items-center gap-3">
                   <CheckCircle className="size-5 text-primary" />
-                  <CardTitle className="text-lg font-semibold">{feature.title}</CardTitle>
+                  <CardTitle className="text-sm font-semibold">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">

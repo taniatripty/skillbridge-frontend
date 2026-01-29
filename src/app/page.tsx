@@ -1,12 +1,15 @@
 
 import { Hero } from "@/components/hero";
-import { Button } from "@/components/ui/button";
+import { userServices } from "@/services/user.services";
 
 
-export default function Home() {
+export default async function Home() {
+  const session=await userServices.getsession()
+  console.log(session)
+  
   return (
    <div>
-   <Button variant='outline' > click me</Button>
+  
    <Hero></Hero>
    </div>
   );

@@ -78,7 +78,7 @@ const Hero = ({
   return (
     <section
       className={cn(
-        "relative py-32 bg-background dark:bg-background/80",
+        "relative  bg-background dark:bg-background/80",
         className
       )}
     >
