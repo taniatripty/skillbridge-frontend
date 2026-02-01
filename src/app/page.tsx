@@ -1,16 +1,18 @@
 
 import { Hero } from "@/components/hero";
-import { userServices } from "@/services/user.services";
+import TutorCard from "@/components/modules/homepage/TutorCard";
 
+import { tutorService } from "@/services/tutor.services";
+import { Tutor } from "../types/tutor";
+import TutorSection from "@/components/modules/homepage/TutorSection";
 
 export default async function Home() {
-  const session=await userServices.getsession()
-  console.log(session)
-  
+
+
   return (
-   <div>
-  
-   <Hero></Hero>
-   </div>
+    <div>
+      <Hero></Hero>
+      <TutorSection></TutorSection>
+    </div>
   );
 }
