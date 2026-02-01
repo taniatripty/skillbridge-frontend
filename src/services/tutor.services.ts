@@ -5,8 +5,8 @@ import { env } from "@/env";
 
 const API_URL = env.API_URL
 
-export const tutorService = {
-  getAllTutors: async () => {
+
+ const getAllTutor=async () => {
     
     try {
            
@@ -27,4 +27,28 @@ export const tutorService = {
     }
     
   }
-};
+   const  getTutorById= async (id: string) => {
+    try {
+      const res = await fetch(`${API_URL}/api/tutor/${id}`, {
+        cache: "no-store",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        return { data: null, error: data };
+      }
+
+      return { data: data.data, error: null };
+    } catch (error) {
+      return {
+        data: null,
+        error: { message: "Failed to fetch tutor" },
+      };
+    }
+  }
+
+export const tutorServices={
+  getAllTutor,
+  getTutorById
+}

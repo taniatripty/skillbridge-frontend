@@ -1,10 +1,11 @@
 // src/components/home/TutorSection.tsx
 
-import { tutorService } from "@/services/tutor.services";
+
+import { tutorServices } from "@/services/tutor.services";
 import TutorCard from "./TutorCard";
 
 export default async function TutorSection() {
-const {data} = await tutorService.getAllTutors();
+const {data} = await tutorServices.getAllTutor();
 
   return (
     <section className="py-12 w-11/12 mx-auto">
