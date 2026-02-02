@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Booking } from "@/types/booking";
+import Link from "next/link";
 
 
 export default function BookingCard({ booking }: { booking: Booking }) {
@@ -80,9 +81,12 @@ export default function BookingCard({ booking }: { booking: Booking }) {
               Cancel
             </Button>
 
-            <Button className="flex-1">
-              View Details
-            </Button>
+            <Link
+        href={`/mybooking/${booking.id}`}
+        className=" block text-center rounded-lg bg-black px-4 py-2 text-sm text-white hover:bg-gray-800"
+      >
+        View Details
+      </Link>
           </div>
         )}
       </CardContent>
