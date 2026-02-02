@@ -5,8 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Booking } from "@/types/booking";
 import { bookingServices } from "@/services/booking.services";
-import { date } from "zod";
-import { use } from "react";
+
 
 export default async function Page({
   params,
@@ -99,7 +98,7 @@ console.log(id)
       {/* Action Button */}
       <div className="mt-4">
         <Button className="w-full" disabled={status !== "CONFIRMED"}>
-          {status === "CONFIRMED" ? "Start Booking" : "Booking Closed"}
+          {status === "CONFIRMED" ? "Review" : "Booking Closed"}
         </Button>
       </div>
     </div>

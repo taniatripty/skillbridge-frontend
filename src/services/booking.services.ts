@@ -44,11 +44,11 @@ const getMyBooking = async () => {
       cache: "no-store",
     });
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch bookings");
-    }
+   
 
     const data = await res.json();
+     if (!res.ok)
+      return { data: null, error: data.message || "Failed to fetch booking" };
 
     return {
       data: data,
@@ -84,7 +84,25 @@ const getBookingById = async (id: string) => {
   }
 };
 
+const cancelBooking = async (bookingId: string) => {
+  const res = await fetch(`${API_URL}/api/bookings/${bookingId}`, {
+    headers: {
+        cookie: cookieStore.toString(),
+      },
+       cache: "no-store",
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to cancel booking");
+  }
+
+  return data.data;
+};
+
 export const bookingServices = {
   getMyBooking,
   getBookingById,
+  cancelBooking
 };

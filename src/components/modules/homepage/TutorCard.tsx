@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function TutorCard({ tutor }: { tutor: Tutor }) {
   return (
-    <div className="rounded-xl border bg-white p-5 shadow-sm hover:shadow-md transition">
+    <div className="rounded-xl border  p-5 shadow-sm hover:shadow-md transition">
       {/* Image */}
       <div className="flex items-center gap-4">
         <Image
@@ -31,7 +31,7 @@ export default function TutorCard({ tutor }: { tutor: Tutor }) {
           {tutor.languages.map((lang: string) => (
             <span
               key={lang}
-              className="rounded-full bg-gray-100 px-3 py-1 text-xs"
+              className="rounded-full  px-3 py-1 text-xs"
             >
               {lang}
             </span>

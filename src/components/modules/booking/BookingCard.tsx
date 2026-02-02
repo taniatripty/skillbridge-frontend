@@ -6,10 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Booking } from "@/types/booking";
 import Link from "next/link";
+import { bookingServices } from "@/services/booking.services";
+import { useRouter } from "next/navigation";
 
 
 export default function BookingCard({ booking }: { booking: Booking }) {
   const { tutorProfile, availabilitySlot } = booking;
+ const router = useRouter();
+  const handleCancel = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${booking.id}`,
+    {
+      method: "DELETE",
+      credentials: "include", // 👈 send cookies automatically
+    }
+  );
+
+  if (res.ok) {
+     router.refresh()
+  }
+};
 
   return (
     <Card className="border-muted bg-background">
@@ -77,7 +93,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
         {/* Actions */}
         {booking.status === "CONFIRMED" && (
           <div className="flex gap-3 pt-2">
-            <Button variant="outline" className="flex-1">
+            <Button variant="outline" className="flex-1"  onClick={handleCancel}>
               Cancel
             </Button>
 

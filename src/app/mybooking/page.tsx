@@ -24,7 +24,7 @@ export default async function MyBookingsPage() {
           <BookingCard key={booking.id} booking={booking} />
         ))}
 
-        {/* {data?.data?.map((booking:Booking)=>booking.id)} */}
+        
       </div>
     </div>
   );
