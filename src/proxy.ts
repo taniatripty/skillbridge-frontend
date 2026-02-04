@@ -7,7 +7,7 @@ export async function proxy(request: NextRequest) {
 
   const { data } = await userServices.getsession()
 
-  // 🔐 Not authenticated
+  //  Not authenticated
   if (!data) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

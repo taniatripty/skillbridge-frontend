@@ -63,6 +63,24 @@ const getMyBooking = async () => {
   }
 };
 
+const getTutorBookings = async () => {
+   const cookieStore = await cookies();
+  const res = await fetch(`${API_URL}/api/bookings/tutorbooking`, {
+          headers: {
+        cookie: cookieStore.toString(),
+      },
+    cache: "no-store",
+    
+  });
+
+  const data = await res.json();
+
+  return {
+    data:data,
+    error: null
+  };
+};
+
 const getBookingById = async (id: string) => {
   try {
     const cookieStore = await cookies();
@@ -104,5 +122,6 @@ const cancelBooking = async (bookingId: string) => {
 export const bookingServices = {
   getMyBooking,
   getBookingById,
-  cancelBooking
+  cancelBooking,
+  getTutorBookings
 };
