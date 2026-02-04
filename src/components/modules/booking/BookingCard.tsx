@@ -18,7 +18,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
     `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${booking.id}`,
     {
       method: "DELETE",
-      credentials: "include", // 👈 send cookies automatically
+      credentials: "include", // send cookies automatically
     }
   );
 
