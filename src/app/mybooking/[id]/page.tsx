@@ -96,11 +96,7 @@ console.log(id)
       </Card>
 
       {/* Action Button */}
-      <div className="mt-4">
-        <Button className="w-full" disabled={status !== "CONFIRMED"}>
-          {status === "CONFIRMED" ? "Review" : "Booking Closed"}
-        </Button>
-      </div>
+      
     </div>
   );
 }

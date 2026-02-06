@@ -105,6 +105,20 @@ export default function BookingCard({ booking }: { booking: Booking }) {
       </Link>
           </div>
         )}
+        {
+         
+          booking.status=="COMPLETED" &&(
+            <div className=" pt-4">
+              <Link
+        href={`/review/${booking.id}`}
+        className=" block text-center rounded-lg bg-black px-4 py-2 text-sm text-white hover:bg-gray-800"
+      >
+        Review
+      </Link>
+      </div>
+          )
+          
+        }
       </CardContent>
     </Card>
   );
