@@ -18,7 +18,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
     `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${booking.id}`,
     {
       method: "DELETE",
-      credentials: "include", // send cookies automatically
+      credentials: "include", 
     }
   );
 
@@ -98,7 +98,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
             </Button>
 
             <Link
-        href={`/mybooking/${booking.id}`}
+        href={`/student-dash/bookings/${booking.id}`}
         className=" block text-center rounded-lg bg-black px-4 py-2 text-sm text-white hover:bg-gray-800"
       >
         View Details
@@ -110,7 +110,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
           booking.status=="COMPLETED" &&(
             <div className=" pt-4">
               <Link
-        href={`/review/${booking.id}`}
+        href={`/student-dash/reviews/${booking.id}`}
         className=" block text-center rounded-lg bg-black px-4 py-2 text-sm text-white hover:bg-gray-800"
       >
         Review

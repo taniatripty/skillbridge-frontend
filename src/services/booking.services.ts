@@ -63,6 +63,66 @@ const getMyBooking = async () => {
   }
 };
 
+const getMyBookingstatus = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(`${API_URL}/api/bookings/my/status`, {
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+      cache: "no-store",
+    });
+
+   
+
+    const data = await res.json();
+     if (!res.ok)
+      return { data: null, error: data.message || "Failed to fetch booking" };
+
+    return {
+      data: data,
+      error: null,
+    };
+  } catch (error: any) {
+    console.error(error);
+    return {
+      data: [],
+      error: error.message,
+    };
+  }
+};
+
+const getallBookings = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(`${API_URL}/api/bookings/all`, {
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+      cache: "no-store",
+    });
+
+   
+
+    const data = await res.json();
+     if (!res.ok)
+      return { data: null, error: data.message || "Failed to fetch booking" };
+
+    return {
+      data: data,
+      error: null,
+    };
+  } catch (error: any) {
+    console.error(error);
+    return {
+      data: [],
+      error: error.message,
+    };
+  }
+};
+
 const getTutorBookings = async () => {
    const cookieStore = await cookies();
   const res = await fetch(`${API_URL}/api/bookings/tutorbooking`, {
@@ -80,6 +140,37 @@ const getTutorBookings = async () => {
     error: null
   };
 };
+
+const getalltutorokingstatus = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(`${API_URL}/api/bookings/tutor/statistics`, {
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+      cache: "no-store",
+    });
+
+   
+
+    const data = await res.json();
+     if (!res.ok)
+      return { data: null, error: data.message || "Failed to fetch booking" };
+
+    return {
+      data: data,
+      error: null,
+    };
+  } catch (error: any) {
+    console.error(error);
+    return {
+      data: [],
+      error: error.message,
+    };
+  }
+};
+
 
 const getBookingById = async (id: string) => {
   try {
@@ -121,7 +212,10 @@ const cancelBooking = async (bookingId: string) => {
 
 export const bookingServices = {
   getMyBooking,
+  getallBookings,
   getBookingById,
   cancelBooking,
-  getTutorBookings
+  getTutorBookings,
+  getMyBookingstatus,
+  getalltutorokingstatus
 };

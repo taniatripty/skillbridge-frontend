@@ -1,24 +1,172 @@
 // src/components/home/TutorSection.tsx
 
 
-import { tutorServices } from "@/services/tutor.services";
+// import { tutorServices } from "@/services/tutor.services";
+// import TutorCard from "./TutorCard";
+
+// export default async function TutorSection() {
+// const {data} = await tutorServices.getAllTutor();
+// console.log(data)
+
+//   return (
+//     <section className="py-12 w-11/12 mx-auto">
+//       <div className="mb-6 flex items-center justify-between">
+//         <h2 className="text-2xl font-bold">Available Tutors</h2>
+        
+//       </div>
+
+//       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+//         {data?.data?.map((tutor: any) => (
+//           <TutorCard key={tutor.id} tutor={tutor} />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+// import { tutorServices } from "@/services/tutor.services";
+// import TutorCard from "./TutorCard";
+// import Link from "next/link";
+
+// export default async function TutorSection() {
+//   const { data } = await tutorServices.getAllTutor();
+
+//   return (
+//     <section className="py-12 w-11/12 mx-auto">
+//       <div className="mb-6 flex items-center justify-between">
+//         <h2 className="text-2xl font-bold">Available Tutors</h2>
+
+//         {/* 🔍 Search Button */}
+//         <button
+//   type="button"
+//   className="rounded-lg border px-4 py-2 text-sm hover:bg-muted"
+  
+// >
+//   Search Tutors
+// </button>
+//       </div>
+
+//       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+//         {data?.data?.map((tutor: any) => (
+//           <TutorCard key={tutor.id} tutor={tutor} />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+"use client";
+
+import { useEffect, useState } from "react";
 import TutorCard from "./TutorCard";
 
-export default async function TutorSection() {
-const {data} = await tutorServices.getAllTutor();
+type Tutor = any;
+
+export default function TutorSearch() {
+  const [tutors, setTutors] = useState<Tutor[]>([]);
+  const [rating, setRating] = useState<number | undefined>();
+  const [hourlyRate, setHourlyRate] = useState<number | undefined>();
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  // initial load
+  useEffect(() => {
+    searchTutors();
+  }, []);
+
+  const searchTutors = async () => {
+    setLoading(true);
+
+    const params = new URLSearchParams();
+
+    if (rating !== undefined) {
+      params.append("rating", String(rating));
+    }
+
+    if (hourlyRate !== undefined) {
+      params.append("hourlyRate", String(hourlyRate));
+    }
+
+    if (languages.length > 0) {
+      params.append("languages", languages.join(","));
+    }
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tutor?${params.toString()}`,
+      { cache: "no-store" }
+    );
+
+    const data = await res.json();
+    setTutors(data.data);
+    setLoading(false);
+  };
 
   return (
-    <section className="py-12 w-11/12 mx-auto">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Available Tutors</h2>
-        
+    <>
+      {/* 🔍 Search Controls */}
+      <div className="mb-6 mt-3 flex flex-wrap gap-3 items-center">
+        {/* Rating */}
+        <input
+          type="number"
+          min={1}
+          max={5}
+          placeholder="Min rating (1–5)"
+          className="border rounded px-3 py-2 text-sm w-44"
+          onChange={(e) =>
+            setRating(e.target.value ? Number(e.target.value) : undefined)
+          }
+        />
+
+        {/* Price */}
+        <input
+          type="number"
+          placeholder="Hourly rate"
+          className="border rounded px-3 py-2 text-sm w-44"
+          onChange={(e) =>
+            setHourlyRate(
+              e.target.value ? Number(e.target.value) : undefined
+            )
+          }
+        />
+
+        {/* Languages */}
+        <input
+          type="text"
+          placeholder="Languages (Math, Physics)"
+          className="border rounded px-3 py-2 text-sm w-64"
+          onChange={(e) =>
+            setLanguages(
+              e.target.value
+                .split(",")
+                .map((l) => l.trim())
+                .filter(Boolean)
+            )
+          }
+        />
+
+        {/* Search Button */}
+        <button
+          onClick={searchTutors}
+          className="rounded-lg border px-4 py-2 text-sm hover:bg-muted"
+        >
+          Search Tutors
+        </button>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {data?.data?.map((tutor: any) => (
-          <TutorCard key={tutor.id} tutor={tutor} />
-        ))}
-      </div>
-    </section>
+      {/* 📋 Results */}
+      {loading ? (
+        <p className="text-sm text-gray-500">Loading...</p>
+      ) : tutors.length === 0 ? (
+        <p className="text-sm text-gray-500">No tutors found</p>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {tutors.map((tutor) => (
+            <TutorCard key={tutor.id} tutor={tutor} />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
