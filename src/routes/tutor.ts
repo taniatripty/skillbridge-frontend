@@ -7,6 +7,10 @@ export const tutorRoutes:Route[]=[
         url:'/',
       
       items: [
+         {
+          title: "All Statistics",
+          url: "/tutor-dash",
+        },
         {
           title: "Set Availibility",
           url: "/tutor-dash/updateavailability",

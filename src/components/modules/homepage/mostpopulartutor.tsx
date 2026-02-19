@@ -9,8 +9,8 @@ console.log(data)
 
   return (
     <section className="py-12 w-11/12 mx-auto">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">most popular tutor</h2>
+      <div className="mb-6 flex items-center justify-center">
+        <h2 className="text-2xl text-center font-bold">Most Popular Tutor</h2>
         
       </div>
 

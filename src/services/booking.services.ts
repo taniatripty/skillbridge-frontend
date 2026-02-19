@@ -63,7 +63,38 @@ const getMyBooking = async () => {
   }
 };
 
-const getMyBookingstatus = async () => {
+// const getMyBookingstatus = async () => {
+//   try {
+//     const cookieStore = await cookies();
+
+//     const res = await fetch(`${API_URL}/api/bookings/my/status`, {
+//       headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//       cache: "no-store",
+//     });
+
+   
+
+//     const data = await res.json();
+//      if (!res.ok)
+//       return { data: null, error: data.message || "Failed to fetch booking" };
+
+//     return {
+//       data: data,
+//       error: null,
+//     };
+//   } catch (error: any) {
+//     console.error(error);
+//     return {
+//       data: [],
+//       error: error.message,
+//     };
+//   }
+// };
+
+
+ const getMyBookingstatus = async () => {
   try {
     const cookieStore = await cookies();
 
@@ -74,25 +105,31 @@ const getMyBookingstatus = async () => {
       cache: "no-store",
     });
 
-   
+    const json = await res.json();
 
-    const data = await res.json();
-     if (!res.ok)
-      return { data: null, error: data.message || "Failed to fetch booking" };
+    // Match backend shape
+    if (!res.ok) {
+      return {
+        success: false,
+        data: null,
+        message: json.message || "Failed to fetch booking",
+      };
+    }
 
     return {
-      data: data,
-      error: null,
+      success: true,
+      data: json.data, // this is your stats object
+      message: null,
     };
   } catch (error: any) {
     console.error(error);
     return {
-      data: [],
-      error: error.message,
+      success: false,
+      data: null,
+      message: error.message || "Something went wrong",
     };
   }
 };
-
 const getallBookings = async () => {
   try {
     const cookieStore = await cookies();

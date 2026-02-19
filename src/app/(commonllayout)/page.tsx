@@ -1,6 +1,8 @@
 
 import { Hero } from "@/components/hero";
 import Mostpopulartutor from "@/components/modules/homepage/mostpopulartutor";
+import StatisticsSection from "@/components/modules/homepage/statisticsSection";
+import TestimonialSection from "@/components/modules/homepage/testimonialSection";
 
 
 
@@ -18,6 +20,8 @@ console.log(data)
       <Hero></Hero>
       <TutorSection></TutorSection>
       <Mostpopulartutor></Mostpopulartutor>
+      <TestimonialSection></TestimonialSection>
+      <StatisticsSection></StatisticsSection>
     </div>
   );
 }

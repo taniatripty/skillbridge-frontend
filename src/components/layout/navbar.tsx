@@ -470,6 +470,7 @@ const Navbar = ({
   const { data, isPending } = authClient.useSession();
 
   const user = data?.user;
+  
   const role = user?.role as string;
 
   /* ---------------- Dashboard Route ---------------- */

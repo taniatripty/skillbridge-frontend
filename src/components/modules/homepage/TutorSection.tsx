@@ -1,61 +1,3 @@
-// src/components/home/TutorSection.tsx
-
-
-// import { tutorServices } from "@/services/tutor.services";
-// import TutorCard from "./TutorCard";
-
-// export default async function TutorSection() {
-// const {data} = await tutorServices.getAllTutor();
-// console.log(data)
-
-//   return (
-//     <section className="py-12 w-11/12 mx-auto">
-//       <div className="mb-6 flex items-center justify-between">
-//         <h2 className="text-2xl font-bold">Available Tutors</h2>
-        
-//       </div>
-
-//       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-//         {data?.data?.map((tutor: any) => (
-//           <TutorCard key={tutor.id} tutor={tutor} />
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
-// import { tutorServices } from "@/services/tutor.services";
-// import TutorCard from "./TutorCard";
-// import Link from "next/link";
-
-// export default async function TutorSection() {
-//   const { data } = await tutorServices.getAllTutor();
-
-//   return (
-//     <section className="py-12 w-11/12 mx-auto">
-//       <div className="mb-6 flex items-center justify-between">
-//         <h2 className="text-2xl font-bold">Available Tutors</h2>
-
-//         {/* 🔍 Search Button */}
-//         <button
-//   type="button"
-//   className="rounded-lg border px-4 py-2 text-sm hover:bg-muted"
-  
-// >
-//   Search Tutors
-// </button>
-//       </div>
-
-//       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-//         {data?.data?.map((tutor: any) => (
-//           <TutorCard key={tutor.id} tutor={tutor} />
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
 
 "use client";
 
@@ -71,7 +13,18 @@ export default function TutorSearch() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // initial load
+  // Convert to Title Case (to match DB format: "Math")
+  const toTitleCase = (text: string) =>
+    text
+      .trim()
+      .toLowerCase()
+      .split(" ")
+      .map(
+        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+      )
+      .join(" ");
+
+  // Initial load
   useEffect(() => {
     searchTutors();
   }, []);
@@ -90,21 +43,32 @@ export default function TutorSearch() {
     }
 
     if (languages.length > 0) {
-      params.append("languages", languages.join(","));
+      const normalizedLanguages = languages.map((l) =>
+        toTitleCase(l)
+      );
+
+      params.append("languages", normalizedLanguages.join(","));
     }
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/tutor?${params.toString()}`,
-      { cache: "no-store" }
-    );
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/tutor?${params.toString()}`,
+        { cache: "no-store" }
+      );
 
-    const data = await res.json();
-    setTutors(data.data);
-    setLoading(false);
+      const data = await res.json();
+      setTutors(data.data || []);
+    } catch (error) {
+      console.error("Failed to fetch tutors:", error);
+      setTutors([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
+    <h1 className="text-center text-2xl font-bold mt-5 mb-5">All Available Tutors</h1>
       {/* 🔍 Search Controls */}
       <div className="mb-6 mt-3 flex flex-wrap gap-3 items-center">
         {/* Rating */}
@@ -149,7 +113,7 @@ export default function TutorSearch() {
         {/* Search Button */}
         <button
           onClick={searchTutors}
-          className="rounded-lg border px-4 py-2 text-sm hover:bg-muted"
+          className="rounded-lg border px-4 py-2 text-sm hover:bg-muted transition"
         >
           Search Tutors
         </button>

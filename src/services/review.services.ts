@@ -34,6 +34,37 @@ const getTutorReviews = async () => {
   }
 };
 
+const getAllReviews = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(`${API_URL}/api/reviews/all`, {
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+      cache: "no-store",
+    });
+
+   
+
+    const data = await res.json();
+     if (!res.ok)
+      return { data: null, error: data.message || "Failed to fetch booking" };
+
+    return {
+      data: data,
+      error: null,
+    };
+  } catch (error: any) {
+    console.error(error);
+    return {
+      data: [],
+      error: error.message,
+    };
+  }
+};
+
 export const reviewServices={
-    getTutorReviews
+    getTutorReviews,
+    getAllReviews
 }

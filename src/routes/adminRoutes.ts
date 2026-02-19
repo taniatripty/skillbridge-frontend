@@ -7,9 +7,20 @@ export const adminRoutes:Route[]=[
       
       items: [
         {
+          title: "All statistics",
+          url: "/admin-dashboard",
+        },
+        {
           title: "All users",
           url: "/admin-dashboard/user",
         },
+        
+       
+        {
+          title: "Status management",
+          url: "/admin-dashboard/status-management",
+        },
+       
        
         {
           title: "create categories",

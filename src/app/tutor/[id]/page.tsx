@@ -1,28 +1,4 @@
 
-// import TutorDetails from "@/components/modules/homepage/TutorDetails";
-// import { tutorServices } from "@/services/tutor.services";
-
-
-// interface PageProps {
-//   params: {
-//     id: string;
-//   };
-// }
-
-// export default async function TutorDetailsPage({ params }: PageProps) {
-//   const { data, error } = await tutorServices.getTutorById();
-//   console.log(data)
-
-//   if (error || !data) {
-//     return <div className="p-10 text-center">Tutor not found</div>;
-//   }
-
-//   return (
-//     <div className="container mx-auto px-4 py-10">
-//       <TutorDetails tutor={data} />
-//     </div>
-//   );
-// }
 
 
 

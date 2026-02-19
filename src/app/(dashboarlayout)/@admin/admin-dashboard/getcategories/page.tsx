@@ -10,7 +10,7 @@ export default async function SubjectsTable() {
 
       <div className="overflow-x-auto bg-white shadow-lg rounded-xl">
         <table className="table w-full">
-          <thead className="bg-gray-100">
+          <thead className="">
             <tr>
               <th>#</th>
               <th>Subject Name</th>
