@@ -1,24 +1,18 @@
-
-
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Booking } from "@/types/booking";
 import { bookingServices } from "@/services/booking.services";
-
-
+import Image from "next/image";
 
 export default async function Page({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const {id}=await params
-console.log(id)
+  const { id } = await params;
+  console.log(id);
 
   // 🔹 Fetch booking details by ID
-  const{data:booking, error}=await bookingServices.getBookingById(id)
-  console.log(booking)
+  const { data: booking, error } = await bookingServices.getBookingById(id);
+  console.log(booking);
 
   if (!booking) {
     return (
@@ -53,11 +47,8 @@ console.log(id)
               ${tutorProfile.hourlyRate}/hour
             </p>
             <div className="flex flex-wrap gap-2 mt-1">
-              {tutorProfile.languages.map((lang:any) => (
-                <span
-                  key={lang}
-                  className="rounded-full  px-3 py-1 text-xs"
-                >
+              {tutorProfile.languages.map((lang: any) => (
+                <span key={lang} className="rounded-full  px-3 py-1 text-xs">
                   {lang}
                 </span>
               ))}
@@ -97,7 +88,6 @@ console.log(id)
       </Card>
 
       {/* Action Button */}
-      
     </div>
   );
 }

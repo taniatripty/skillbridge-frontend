@@ -1,7 +1,5 @@
 
-
 "use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -64,18 +62,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
   });
 
-  const googleLogin = async () => {
-    const toastId = toast.loading("Redirecting to Google...");
-    try {
-      await authClient.signIn.social({
-        provider: "google",
-        callbackURL: window.location.origin,
-      });
-      toast.dismiss(toastId);
-    } catch {
-      toast.error("Failed to login with Google", { id: toastId });
-    }
-  };
+
 
   return (
     <Card {...props}>
@@ -204,15 +191,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             : "Create account"}
         </Button>
 
-        <Button
-          onClick={googleLogin}
-          variant="outline"
-          type="button"
-          className="w-full"
-          disabled={form.state.isSubmitting}
-        >
-          Sign up with Google
-        </Button>
+     
 
         <p className="text-sm text-muted-foreground text-center mt-2">
           Already have an account?{" "}

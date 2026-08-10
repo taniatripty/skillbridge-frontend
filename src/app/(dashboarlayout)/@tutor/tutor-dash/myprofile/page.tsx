@@ -1,52 +1,69 @@
-import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
+import Image from "next/image";
+import Link from "next/link";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { userServices } from "@/services/user.services";
-import Link from "next/link";
 
 export default async function ProfilePage() {
-  const { data: session} = await userServices.getsession()
-  console.log(session)
+  const { data: session } = await userServices.getsession();
+
+  console.log(session);
 
   if (!session) {
     return (
-      <div className="max-w-3xl mx-auto py-20 text-center text-muted-foreground">
-        Profile not available
+      <div className="flex min-h-[400px] items-center justify-center">
+        <p className="text-muted-foreground">
+          Profile not available
+        </p>
       </div>
     );
   }
 
+  const image =
+    session.user.image && session.user.image.trim() !== ""
+      ? session.user.image
+      : "/default-avatar.png";
+
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4">
-      <Card className="shadow-lg">
-        <CardContent className="p-8">
+    <div className="container mx-auto max-w-4xl px-4 py-8">
+      <Card>
+        <CardContent className="p-6">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Profile Overview
-            </h1>
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold">
+                Profile Overview
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Manage your personal information
+              </p>
+            </div>
 
             <Button asChild variant="outline">
-              <Link href="/tutor-dash/manageprofile">Edit Profile</Link>
+              <Link href="/tutor-dash/manageprofile">
+                Edit Profile
+              </Link>
             </Button>
           </div>
 
           <Separator className="my-6" />
 
           {/* Profile Body */}
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col gap-8 md:flex-row">
             {/* Avatar */}
             <div className="flex-shrink-0">
-              <div className="relative h-32 w-32 rounded-full overflow-hidden border shadow-sm">
+              <div className="relative h-32 w-32 overflow-hidden rounded-full border shadow-sm">
                 <Image
-                  src={session.user.image }
-                  alt={session.user.name}
-                  height={1920}
-                  width={1920}
+                  src={image}
+                  alt={session.user.name || "Profile"}
+                  fill
+                  sizes="128px"
                   className="object-cover"
                 />
               </div>
@@ -55,26 +72,42 @@ export default async function ProfilePage() {
             {/* Details */}
             <div className="flex-1 space-y-5">
               <div>
-                <p className="text-sm text-muted-foreground">Full Name</p>
-                <p className="text-lg font-medium">{session.user.name}</p>
+                <p className="text-sm text-muted-foreground">
+                  Full Name
+                </p>
+                <p className="text-lg font-medium">
+                  {session.user.name}
+                </p>
               </div>
 
               <div>
-                <p className="text-sm text-muted-foreground">Email Address</p>
-                <p className="text-base font-medium">{session.user.email}</p>
+                <p className="text-sm text-muted-foreground">
+                  Email Address
+                </p>
+                <p className="text-base font-medium">
+                  {session.user.email}
+                </p>
               </div>
 
               <div>
-                <p className="text-sm text-muted-foreground">Phone Number</p>
+                <p className="text-sm text-muted-foreground">
+                  Phone Number
+                </p>
                 <p className="text-base font-medium">
                   {session.user.phone || "Not provided"}
                 </p>
               </div>
 
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Role</p>
-                <Badge variant="secondary" className="text-sm px-3 py-1">
-                  {session.user.role}
+                <p className="mb-1 text-sm text-muted-foreground">
+                  Role
+                </p>
+
+                <Badge
+                  variant="secondary"
+                  className="px-3 py-1 text-sm"
+                >
+                  {session.user.role || "STUDENT"}
                 </Badge>
               </div>
             </div>

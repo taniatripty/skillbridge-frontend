@@ -1,32 +1,3 @@
-// import { env } from "@/env";
-
-// const API_URL=env.API_URL
-
-// const getMybooking=async () => {
-
-//     try {
-
-//             const res=await fetch(`${API_URL}/api/bookings`,
-//               {next:{revalidate:10}})
-//             // { cache: "no-store"}
-//             // )
-
-//             const data=await res.json();
-//             return{
-//                 data:data, error:null
-//             }
-
-//         } catch (err) {
-//         console.error(err)
-//         return{ data:null, error:{message:'something went wrong'}}
-
-//     }
-
-//   }
-
-//   export const bookingservices={
-// getMybooking
-//   }
 
 import { env } from "@/env";
 import { cookies } from "next/headers";
@@ -37,7 +8,7 @@ const getMyBooking = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/bookings`, {
+    const res = await fetch(`${API_URL}/api/v1/bookings`, {
       headers: {
         cookie: cookieStore.toString(),
       },
@@ -98,7 +69,7 @@ const getMyBooking = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/bookings/my/status`, {
+    const res = await fetch(`${API_URL}/api/v1/bookings/my/status`, {
       headers: {
         cookie: cookieStore.toString(),
       },
@@ -134,7 +105,7 @@ const getallBookings = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/bookings/all`, {
+    const res = await fetch(`${API_URL}/api/v1/bookings/all`, {
       headers: {
         cookie: cookieStore.toString(),
       },
@@ -162,7 +133,7 @@ const getallBookings = async () => {
 
 const getTutorBookings = async () => {
    const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/api/bookings/tutorbooking`, {
+  const res = await fetch(`${API_URL}/api/v1/bookings/tutorbooking`, {
           headers: {
         cookie: cookieStore.toString(),
       },
@@ -182,7 +153,7 @@ const getalltutorokingstatus = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/bookings/tutor/statistics`, {
+    const res = await fetch(`${API_URL}/api/v1/bookings/tutor/statistics`, {
       headers: {
         cookie: cookieStore.toString(),
       },
@@ -212,7 +183,7 @@ const getalltutorokingstatus = async () => {
 const getBookingById = async (id: string) => {
   try {
     const cookieStore = await cookies();
-    const res = await fetch(`${API_URL}/api/bookings/${id}`, {
+    const res = await fetch(`${API_URL}/api/v1/bookings/${id}`, {
       headers: {
         cookie: cookieStore.toString(),
       },
@@ -231,7 +202,7 @@ const getBookingById = async (id: string) => {
 };
 
 const cancelBooking = async (bookingId: string) => {
-  const res = await fetch(`${API_URL}/api/bookings/${bookingId}`, {
+  const res = await fetch(`${API_URL}/api/v1/bookings/${bookingId}`, {
     headers: {
         cookie: cookieStore.toString(),
       },

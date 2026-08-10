@@ -3,3 +3,4 @@ export const Roles = {
   STUDENT:"STUDENT",
   TUTOR:"TUTOR"
 };
+export type Role = (typeof Roles)[keyof typeof Roles];

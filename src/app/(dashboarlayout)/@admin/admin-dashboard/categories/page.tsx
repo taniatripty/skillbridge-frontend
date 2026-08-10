@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 import { toast } from "sonner";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://skillbridge-backend-nine.vercel.app";
 
 export default function CreateCategory() {
   const [name, setName] = useState("");
@@ -21,12 +25,12 @@ export default function CreateCategory() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/categories", {
+      const res = await fetch(`${BASE_URL}/api/v1/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        credentials: "include", // 🔥 Important for cookies
         body: JSON.stringify({ name }),
       });
 
@@ -53,9 +57,7 @@ export default function CreateCategory() {
   return (
     <Card className="w-9/12 mx-auto mt-10 shadow-lg">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold">
-          Create Category
-        </CardTitle>
+        <CardTitle className="text-xl font-semibold">Create Category</CardTitle>
       </CardHeader>
 
       <CardContent>

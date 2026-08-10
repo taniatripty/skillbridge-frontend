@@ -23,6 +23,7 @@ type Review = {
 export default async function TutorReviewsPage() {
   const {data} = await reviewServices.getTutorReviews()
   console.log(data)
+  const reviews=data?.data || []
 
   return (
     <div className="w-9/12 mx-auto p-6">
@@ -32,7 +33,7 @@ export default async function TutorReviewsPage() {
         </CardHeader>
 
         <CardContent>
-          {data.length === 0 ? (
+          {reviews.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               No reviews found.
             </p>
@@ -47,7 +48,7 @@ export default async function TutorReviewsPage() {
               </TableHeader>
 
               <TableBody>
-                {data?.data?.map((review:any) => (
+                {reviews.map((review:any) => (
                   <TableRow key={review.id}>
                     {/* ⭐ Rating */}
                     <TableCell>

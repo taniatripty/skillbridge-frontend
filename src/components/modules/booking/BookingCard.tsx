@@ -15,7 +15,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
  const router = useRouter();
   const handleCancel = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${booking.id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/bookings/${booking.id}`,
     {
       method: "DELETE",
       credentials: "include", 

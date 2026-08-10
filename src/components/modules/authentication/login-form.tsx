@@ -1,7 +1,5 @@
 
-
 "use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,11 +47,7 @@ export function LoginForm(props: React.ComponentProps<typeof Card>) {
       try {
       
 
-        // if (error) {
-        //   toast.error(error.message, { id: toastId });
-        //   return;
-        // }
-
+       
 const { error} = await authClient.signIn.email(value);
 
 
@@ -80,18 +74,7 @@ const { error} = await authClient.signIn.email(value);
     },
   });
 
-  const googleLogin = async () => {
-    const toastId = toast.loading("Redirecting to Google...");
-    try {
-      await authClient.signIn.social({
-        provider: "google",
-        callbackURL: window.location.origin,
-      });
-      toast.dismiss(toastId);
-    } catch {
-      toast.error("Failed to login with Google", { id: toastId });
-    }
-  };
+
 
   return (
     <Card {...props}>
@@ -201,22 +184,10 @@ const { error} = await authClient.signIn.email(value);
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
-            </span>
-          </div>
+          
         </div>
 
-        <Button
-          variant="outline"
-          type="button"
-          onClick={googleLogin}
-          className="w-full"
-          disabled={form.state.isSubmitting}
-        >
-          Login with Google
-        </Button>
+       
       </CardFooter>
     </Card>
   );

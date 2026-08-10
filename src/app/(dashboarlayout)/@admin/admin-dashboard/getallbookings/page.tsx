@@ -38,9 +38,12 @@ export default function AllBookingsPage() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/bookings/all", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://skillbridge-backend-nine.vercel.app/api/v1/bookings/all",
+          {
+            credentials: "include",
+          },
+        );
 
         const data = await res.json();
 

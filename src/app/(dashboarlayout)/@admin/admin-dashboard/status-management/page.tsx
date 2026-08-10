@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -26,7 +25,7 @@ export default function ManageUserStatus() {
     try {
       setLoading(true);
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/users`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users`,
         {
           credentials: "include",
         }
@@ -69,7 +68,7 @@ export default function ManageUserStatus() {
       setActionLoading(true);
 
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/users/ban/${selectedUser.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/ban/${selectedUser.id}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -96,7 +95,7 @@ export default function ManageUserStatus() {
       setActionLoading(true);
 
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/users/unban/${userId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/unban/${userId}`,
         {
           method: "PATCH",
           credentials: "include",

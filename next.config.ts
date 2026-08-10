@@ -11,12 +11,33 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'example.com',
+       
+      },
+      {
+        protocol: 'https',
         hostname: 'i.ibb.co',
          pathname: '/**'
        
       },
+
     ],
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/:path*`,
+      },
+      {
+        source: "/api/v1/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/:path*`,
+      },
+    ];
+  },
+
+
 
 };
 

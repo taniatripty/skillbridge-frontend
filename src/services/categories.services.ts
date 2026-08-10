@@ -1,8 +1,11 @@
 export const categoryServices = {
   getAllCategories: async () => {
-    const res = await fetch("http://localhost:5000/api/categories", {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      "https://skillbridge-backend-nine.vercel.app/api/v1/categories",
+      {
+        cache: "no-store",
+      },
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch categories");

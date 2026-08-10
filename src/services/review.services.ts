@@ -8,7 +8,7 @@ const getTutorReviews = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/reviews/tutor`, {
+    const res = await fetch(`${API_URL}/api/v1/reviews/tutor`, {
       headers: {
         cookie: cookieStore.toString(),
       },
@@ -38,7 +38,7 @@ const getAllReviews = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/reviews/all`, {
+    const res = await fetch(`${API_URL}/api/v1/reviews/all`, {
       headers: {
         cookie: cookieStore.toString(),
       },

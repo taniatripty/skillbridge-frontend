@@ -24,7 +24,7 @@ export default function TestimonialSlider({ reviews }: Props) {
   const duplicatedReviews = [...reviews, ...reviews];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-blue-50 to-indigo-50 overflow-hidden">
+    <section className="py-24  overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Title */}
         <div className="text-center mb-16">

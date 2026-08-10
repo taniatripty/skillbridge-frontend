@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useState } from "react";
@@ -20,16 +18,19 @@ export default function BookingModal({
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          tutorProfileId: tutor.id,
-          availabilitySlotId: slot.id,
-          price: tutor.hourlyRate,
-        }),
-      });
+      const res = await fetch(
+        "https://skillbridge-backend-nine.vercel.app/api/v1/bookings",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            tutorProfileId: tutor.id,
+            availabilitySlotId: slot.id,
+            price: tutor.hourlyRate,
+          }),
+        },
+      );
 
       const result = await res.json();
 

@@ -37,7 +37,7 @@ const getAllUser=async function(){
     try {
         const cookiestore=await cookies();
   console.log(cookiestore)
-  const res= await fetch(`${API_URL}/api/users`,{
+  const res= await fetch(`${API_URL}/api/v1/users`,{
     headers:{
       cookie:cookiestore.toString()
     },
@@ -59,7 +59,7 @@ const getDashboardStats=async function(){
     try {
         const cookiestore=await cookies();
   console.log(cookiestore)
-  const res= await fetch(`${API_URL}/api/users/all`,{
+  const res= await fetch(`${API_URL}/api/v1/users/all`,{
     headers:{
       cookie:cookiestore.toString()
     },

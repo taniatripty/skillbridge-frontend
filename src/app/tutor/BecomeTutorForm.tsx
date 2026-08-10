@@ -1,10 +1,8 @@
-
-
 "use client";
 
-import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type Category = {
@@ -27,7 +25,7 @@ export default function BecomeTutorForm({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch("https://skillbridge-backend-nine.vercel.app/api/v1/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data.data))
       .catch(() => toast.error("Failed to load categories"));
@@ -35,9 +33,7 @@ export default function BecomeTutorForm({
 
   const toggleCategory = (name: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(name)
-        ? prev.filter((c) => c !== name)
-        : [...prev, name]
+      prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
     );
   };
 
@@ -46,19 +42,22 @@ export default function BecomeTutorForm({
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/tutor", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          experience: Number(formData.experience),
-          education: formData.education,
-          hourlyRate: Number(formData.hourlyRate),
-          subjects: selectedCategories,
-        }),
-      });
+      const res = await fetch(
+        "https://skillbridge-backend-nine.vercel.app/api/v1/tutor",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            experience: Number(formData.experience),
+            education: formData.education,
+            hourlyRate: Number(formData.hourlyRate),
+            subjects: selectedCategories,
+          }),
+        },
+      );
 
       const result = await res.json();
 

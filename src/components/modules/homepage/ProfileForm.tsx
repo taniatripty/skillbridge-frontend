@@ -1,4 +1,3 @@
-
 // "use client";
 
 // import { useState } from "react";
@@ -35,7 +34,7 @@
 //     try {
 //       setLoading(true);
 
-//       const res = await fetch("http://localhost:5000/api/users/profile", {
+//       const res = await fetch("https://skillbridge-backend-nine.vercel.app/api/users/profile", {
 //         method: "PATCH",
 //         headers: { "Content-Type": "application/json" },
 //         credentials: "include", // ✅ cookie auth
@@ -192,7 +191,7 @@
 //     try {
 //       setSaving(true);
 
-//       const res = await fetch("http://localhost:5000/api/users/profile", {
+//       const res = await fetch("https://skillbridge-backend-nine.vercel.app/api/users/profile", {
 //         method: "PATCH",
 //         headers: { "Content-Type": "application/json" },
 //         credentials: "include",
@@ -300,10 +299,10 @@
 
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface ProfileFormProps {
@@ -342,16 +341,18 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
     setUploading(true);
     try {
-     
-     
-      const res = await fetch(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`, {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error?.message || "Image upload failed");
+      if (!res.ok)
+        throw new Error(data.error?.message || "Image upload failed");
 
       setForm({ ...form, image: data.data.url });
       toast.success("Image uploaded successfully!");
@@ -366,12 +367,15 @@ export default function ProfileForm({ user }: ProfileFormProps) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/users/profile", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://skillbridge-backend-nine.vercel.app/api/v1/users/profile",
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(form),
+        },
+      );
 
       const data = await res.json();
 

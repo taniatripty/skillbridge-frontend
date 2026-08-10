@@ -4,23 +4,22 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export default function TutorBookingActions({
-  booking,
-}: {
-  booking: any;
-}) {
+export default function TutorBookingActions({ booking }: { booking: any }) {
   const router = useRouter();
 
   const updateStatus = async (status: "CANCELLED" | "COMPLETED") => {
     try {
-      await fetch(`http://localhost:5000/api/bookings/${booking.id}/status`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
+      await fetch(
+        `https://skillbridge-backend-nine.vercel.app/api/v1/bookings/${booking.id}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ status }),
         },
-         credentials: "include",
-        body: JSON.stringify({ status }),
-      });
+      );
 
       toast.success(`Booking ${status.toLowerCase()}`);
       router.refresh();
@@ -30,11 +29,7 @@ export default function TutorBookingActions({
   };
 
   if (booking.status !== "CONFIRMED") {
-    return (
-      <span className="text-muted-foreground text-sm">
-        No actions
-      </span>
-    );
+    return <span className="text-muted-foreground text-sm">No actions</span>;
   }
 
   return (
@@ -47,10 +42,7 @@ export default function TutorBookingActions({
         Cancel
       </Button>
 
-      <Button
-        size="sm"
-        onClick={() => updateStatus("COMPLETED")}
-      >
+      <Button size="sm" onClick={() => updateStatus("COMPLETED")}>
         Complete
       </Button>
     </div>

@@ -8,7 +8,7 @@ export default async function SubjectsTable() {
     <div className="w-11/12 mx-auto py-12">
       <h1 className="text-3xl font-bold mb-6">All Subjects</h1>
 
-      <div className="overflow-x-auto bg-white shadow-lg rounded-xl">
+      <div className="overflow-x-auto shadow-lg rounded-xl">
         <table className="table w-full">
           <thead className="">
             <tr>
