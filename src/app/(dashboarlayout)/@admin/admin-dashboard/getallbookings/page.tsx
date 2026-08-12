@@ -39,9 +39,11 @@ export default function AllBookingsPage() {
     const fetchBookings = async () => {
       try {
         const res = await fetch(
-          "https://skillbridge-backend-nine.vercel.app/api/v1/bookings/all",
+          "/api/v1/bookings/all",
           {
-            credentials: "include",
+            method: "GET",
+             credentials: "include",
+              cache: "no-store",
           },
         );
 

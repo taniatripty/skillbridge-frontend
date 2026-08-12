@@ -3,7 +3,9 @@ export const categoryServices = {
     const res = await fetch(
       "https://skillbridge-backend-nine.vercel.app/api/v1/categories",
       {
+       
         cache: "no-store",
+          credentials: "include",
       },
     );
 

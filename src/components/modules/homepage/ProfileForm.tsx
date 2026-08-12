@@ -368,7 +368,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
     setLoading(true);
     try {
       const res = await fetch(
-        "https://skillbridge-backend-nine.vercel.app/api/v1/users/profile",
+        "/api/v1/users/profile",
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

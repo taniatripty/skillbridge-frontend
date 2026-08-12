@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -19,9 +18,7 @@ export default function TutorSearch() {
       .trim()
       .toLowerCase()
       .split(" ")
-      .map(
-        (word) => word.charAt(0).toUpperCase() + word.slice(1)
-      )
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
   // Initial load
@@ -43,18 +40,17 @@ export default function TutorSearch() {
     }
 
     if (languages.length > 0) {
-      const normalizedLanguages = languages.map((l) =>
-        toTitleCase(l)
-      );
+      const normalizedLanguages = languages.map((l) => toTitleCase(l));
 
       params.append("languages", normalizedLanguages.join(","));
     }
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/tutor?${params.toString()}`,
-        { cache: "no-store" }
-      );
+      const res = await fetch(`/api/v1/tutor?${params.toString()}`, {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+      });
 
       const data = await res.json();
       setTutors(data.data || []);
@@ -68,7 +64,9 @@ export default function TutorSearch() {
 
   return (
     <>
-    <h1 className="text-center text-2xl font-bold mt-5 mb-5">All Available Tutors</h1>
+      <h1 className="text-center text-2xl font-bold mt-5 mb-5">
+        All Available Tutors
+      </h1>
       {/* 🔍 Search Controls */}
       <div className="mb-6 mt-3 flex flex-wrap gap-3 items-center">
         {/* Rating */}
@@ -89,9 +87,7 @@ export default function TutorSearch() {
           placeholder="Hourly rate"
           className="border rounded px-3 py-2 text-sm w-44"
           onChange={(e) =>
-            setHourlyRate(
-              e.target.value ? Number(e.target.value) : undefined
-            )
+            setHourlyRate(e.target.value ? Number(e.target.value) : undefined)
           }
         />
 
@@ -105,7 +101,7 @@ export default function TutorSearch() {
               e.target.value
                 .split(",")
                 .map((l) => l.trim())
-                .filter(Boolean)
+                .filter(Boolean),
             )
           }
         />
@@ -134,6 +130,3 @@ export default function TutorSearch() {
     </>
   );
 }
-
-
-

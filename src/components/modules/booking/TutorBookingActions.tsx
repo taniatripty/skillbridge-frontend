@@ -10,7 +10,7 @@ export default function TutorBookingActions({ booking }: { booking: any }) {
   const updateStatus = async (status: "CANCELLED" | "COMPLETED") => {
     try {
       await fetch(
-        `https://skillbridge-backend-nine.vercel.app/api/v1/bookings/${booking.id}/status`,
+        `/api/v1/bookings/${booking.id}/status`,
         {
           method: "PATCH",
           headers: {

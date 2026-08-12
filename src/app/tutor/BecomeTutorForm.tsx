@@ -43,7 +43,7 @@ export default function BecomeTutorForm({
 
     try {
       const res = await fetch(
-        "https://skillbridge-backend-nine.vercel.app/api/v1/tutor",
+        "/api/v1/tutor",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -19,7 +19,7 @@ export default function BookingModal({
 
     try {
       const res = await fetch(
-        "https://skillbridge-backend-nine.vercel.app/api/v1/bookings",
+        "/api/v1/bookings",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

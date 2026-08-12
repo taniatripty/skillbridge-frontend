@@ -1,44 +1,159 @@
 
-import { env } from "@/env";
-import { cookies } from "next/headers";
+// import { env } from "@/env";
+// import { cookies } from "next/headers";
 
-const API_URL = env.API_URL;
+// const API_URL = env.API_URL;
 
-const getMyBooking = async () => {
-  try {
-    const cookieStore = await cookies();
-
-    const res = await fetch(`${API_URL}/api/v1/bookings`, {
-      headers: {
-        cookie: cookieStore.toString(),
-      },
-      cache: "no-store",
-    });
-
-   
-
-    const data = await res.json();
-     if (!res.ok)
-      return { data: null, error: data.message || "Failed to fetch booking" };
-
-    return {
-      data: data,
-      error: null,
-    };
-  } catch (error: any) {
-    console.error(error);
-    return {
-      data: [],
-      error: error.message,
-    };
-  }
-};
-
-// const getMyBookingstatus = async () => {
+// const getMyBooking = async () => {
 //   try {
 //     const cookieStore = await cookies();
 
-//     const res = await fetch(`${API_URL}/api/bookings/my/status`, {
+//     const res = await fetch(`${API_URL}/api/v1/bookings`, {
+//       headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//       cache: "no-store",
+//     });
+
+   
+
+//     const data = await res.json();
+//      if (!res.ok)
+//       return { data: null, error: data.message || "Failed to fetch booking" };
+
+//     return {
+//       data: data,
+//       error: null,
+//     };
+//   } catch (error: any) {
+//     console.error(error);
+//     return {
+//       data: [],
+//       error: error.message,
+//     };
+//   }
+// };
+
+// // const getMyBookingstatus = async () => {
+// //   try {
+// //     const cookieStore = await cookies();
+
+// //     const res = await fetch(`${API_URL}/api/bookings/my/status`, {
+// //       headers: {
+// //         cookie: cookieStore.toString(),
+// //       },
+// //       cache: "no-store",
+// //     });
+
+   
+
+// //     const data = await res.json();
+// //      if (!res.ok)
+// //       return { data: null, error: data.message || "Failed to fetch booking" };
+
+// //     return {
+// //       data: data,
+// //       error: null,
+// //     };
+// //   } catch (error: any) {
+// //     console.error(error);
+// //     return {
+// //       data: [],
+// //       error: error.message,
+// //     };
+// //   }
+// // };
+
+
+//  const getMyBookingstatus = async () => {
+//   try {
+//     const cookieStore = await cookies();
+
+//     const res = await fetch(`${API_URL}/api/v1/bookings/my/status`, {
+//       headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//       cache: "no-store",
+//     });
+
+//     const json = await res.json();
+
+//     // Match backend shape
+//     if (!res.ok) {
+//       return {
+//         success: false,
+//         data: null,
+//         message: json.message || "Failed to fetch booking",
+//       };
+//     }
+
+//     return {
+//       success: true,
+//       data: json.data, // this is your stats object
+//       message: null,
+//     };
+//   } catch (error: any) {
+//     console.error(error);
+//     return {
+//       success: false,
+//       data: null,
+//       message: error.message || "Something went wrong",
+//     };
+//   }
+// };
+// const getallBookings = async () => {
+//   try {
+//     const cookieStore = await cookies();
+
+//     const res = await fetch(`${API_URL}/api/v1/bookings/all`, {
+//       headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//       cache: "no-store",
+//     });
+
+   
+
+//     const data = await res.json();
+//      if (!res.ok)
+//       return { data: null, error: data.message || "Failed to fetch booking" };
+
+//     return {
+//       data: data,
+//       error: null,
+//     };
+//   } catch (error: any) {
+//     console.error(error);
+//     return {
+//       data: [],
+//       error: error.message,
+//     };
+//   }
+// };
+
+// const getTutorBookings = async () => {
+//    const cookieStore = await cookies();
+//   const res = await fetch(`${API_URL}/api/v1/bookings/tutorbooking`, {
+//           headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//     cache: "no-store",
+    
+//   });
+
+//   const data = await res.json();
+
+//   return {
+//     data:data,
+//     error: null
+//   };
+// };
+
+// const getalltutorokingstatus = async () => {
+//   try {
+//     const cookieStore = await cookies();
+
+//     const res = await fetch(`${API_URL}/api/v1/bookings/tutor/statistics`, {
 //       headers: {
 //         cookie: cookieStore.toString(),
 //       },
@@ -65,20 +180,110 @@ const getMyBooking = async () => {
 // };
 
 
- const getMyBookingstatus = async () => {
+// const getBookingById = async (id: string) => {
+//   try {
+//     const cookieStore = await cookies();
+//     const res = await fetch(`${API_URL}/api/v1/bookings/${id}`, {
+//       headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//       cache: "no-store",
+//     });
+//     const data = await res.json();
+//     console.log(data);
+
+//     if (!res.ok)
+//       return { data: null, error: data.message || "Failed to fetch booking" };
+//     return { data: data.data, error: null };
+//   } catch (err) {
+//     console.log(err);
+//     return { data: null, error: { message: "Something went wrong" } };
+//   }
+// };
+
+// const cancelBooking = async (bookingId: string) => {
+//   const res = await fetch(`${API_URL}/api/v1/bookings/${bookingId}`, {
+//     headers: {
+//         cookie: cookieStore.toString(),
+//       },
+//        cache: "no-store",
+//   });
+
+//   const data = await res.json();
+
+//   if (!res.ok) {
+//     throw new Error(data.message || "Failed to cancel booking");
+//   }
+
+//   return data.data;
+// };
+
+// export const bookingServices = {
+//   getMyBooking,
+//   getallBookings,
+//   getBookingById,
+//   cancelBooking,
+//   getTutorBookings,
+//   getMyBookingstatus,
+//   getalltutorokingstatus
+// };
+
+
+import { env } from "@/env";
+import { cookies } from "next/headers";
+
+const API_URL = env.API_URL;
+
+const getMyBooking = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/v1/bookings/my/status`, {
+    const res = await fetch(`${API_URL}/api/v1/bookings`, {
       headers: {
-        cookie: cookieStore.toString(),
+        Cookie: cookieStore.toString(),
       },
       cache: "no-store",
     });
 
+    const data = await res.json();
+
+    if (!res.ok) {
+      return {
+        data: null,
+        error: data.message || "Failed to fetch booking",
+      };
+    }
+
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
+  }
+};
+
+const getMyBookingstatus = async () => {
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(
+      `${API_URL}/api/v1/bookings/my/status`,
+      {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
+      },
+    );
+
     const json = await res.json();
 
-    // Match backend shape
     if (!res.ok) {
       return {
         success: false,
@@ -89,133 +294,205 @@ const getMyBooking = async () => {
 
     return {
       success: true,
-      data: json.data, // this is your stats object
+      data: json.data,
       message: null,
     };
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
+
     return {
       success: false,
       data: null,
-      message: error.message || "Something went wrong",
+      message: "Something went wrong",
     };
   }
 };
+
 const getallBookings = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/v1/bookings/all`, {
-      headers: {
-        cookie: cookieStore.toString(),
+    const res = await fetch(
+      `${API_URL}/api/v1/bookings/all`,
+      {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
       },
-      cache: "no-store",
-    });
-
-   
+    );
 
     const data = await res.json();
-     if (!res.ok)
-      return { data: null, error: data.message || "Failed to fetch booking" };
+
+    if (!res.ok) {
+      return {
+        data: null,
+        error: data.message || "Failed to fetch bookings",
+      };
+    }
 
     return {
-      data: data,
+      data,
       error: null,
     };
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
+
     return {
-      data: [],
-      error: error.message,
+      data: null,
+      error: "Something went wrong",
     };
   }
 };
 
 const getTutorBookings = async () => {
-   const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/api/v1/bookings/tutorbooking`, {
-          headers: {
-        cookie: cookieStore.toString(),
+  try {
+    const cookieStore = await cookies();
+
+    const res = await fetch(
+      `${API_URL}/api/v1/bookings/tutorbooking`,
+      {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
       },
-    cache: "no-store",
-    
-  });
+    );
 
-  const data = await res.json();
+    const data = await res.json();
 
-  return {
-    data:data,
-    error: null
-  };
+    if (!res.ok) {
+      return {
+        data: null,
+        error: data.message || "Failed to fetch tutor bookings",
+      };
+    }
+
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
+  }
 };
 
 const getalltutorokingstatus = async () => {
   try {
     const cookieStore = await cookies();
 
-    const res = await fetch(`${API_URL}/api/v1/bookings/tutor/statistics`, {
-      headers: {
-        cookie: cookieStore.toString(),
+    const res = await fetch(
+      `${API_URL}/api/v1/bookings/tutor/statistics`,
+      {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
       },
-      cache: "no-store",
-    });
-
-   
+    );
 
     const data = await res.json();
-     if (!res.ok)
-      return { data: null, error: data.message || "Failed to fetch booking" };
+
+    if (!res.ok) {
+      return {
+        data: null,
+        error: data.message || "Failed to fetch booking statistics",
+      };
+    }
 
     return {
-      data: data,
+      data,
       error: null,
     };
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
+
     return {
-      data: [],
-      error: error.message,
+      data: null,
+      error: "Something went wrong",
     };
   }
 };
-
 
 const getBookingById = async (id: string) => {
   try {
     const cookieStore = await cookies();
-    const res = await fetch(`${API_URL}/api/v1/bookings/${id}`, {
-      headers: {
-        cookie: cookieStore.toString(),
-      },
-      cache: "no-store",
-    });
-    const data = await res.json();
-    console.log(data);
 
-    if (!res.ok)
-      return { data: null, error: data.message || "Failed to fetch booking" };
-    return { data: data.data, error: null };
-  } catch (err) {
-    console.log(err);
-    return { data: null, error: { message: "Something went wrong" } };
+    const res = await fetch(
+      `${API_URL}/api/v1/bookings/${id}`,
+      {
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+        cache: "no-store",
+      },
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return {
+        data: null,
+        error: data.message || "Failed to fetch booking",
+      };
+    }
+
+    return {
+      data: data.data,
+      error: null,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
   }
 };
 
 const cancelBooking = async (bookingId: string) => {
-  const res = await fetch(`${API_URL}/api/v1/bookings/${bookingId}`, {
-    headers: {
-        cookie: cookieStore.toString(),
+  try {
+    // ✅ You were missing this
+    const cookieStore = await cookies();
+
+    const res = await fetch(
+      `${API_URL}/api/v1/bookings/${bookingId}`,
+      {
+        // Change this to PATCH if your backend uses PATCH
+        method: "DELETE",
+
+        headers: {
+          Cookie: cookieStore.toString(),
+        },
+
+        cache: "no-store",
       },
-       cache: "no-store",
-  });
+    );
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if (!res.ok) {
-    throw new Error(data.message || "Failed to cancel booking");
+    if (!res.ok) {
+      throw new Error(
+        data.message || "Failed to cancel booking",
+      );
+    }
+
+    return data.data;
+  } catch (error) {
+    console.error(error);
+
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong",
+    );
   }
-
-  return data.data;
 };
 
 export const bookingServices = {
@@ -225,5 +502,5 @@ export const bookingServices = {
   cancelBooking,
   getTutorBookings,
   getMyBookingstatus,
-  getalltutorokingstatus
+  getalltutorokingstatus,
 };

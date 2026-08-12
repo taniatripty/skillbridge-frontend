@@ -46,7 +46,7 @@ export default function UpdateAvailability() {
 
     try {
       const res = await fetch(
-        "https://skillbridge-backend-nine.vercel.app/api/v1/tutor/availability",
+        "/api/v1/tutor/availability",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

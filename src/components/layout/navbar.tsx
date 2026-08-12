@@ -60,10 +60,18 @@ const Navbar = ({
    
   ],
 }: NavbarProps) => {
-  const { data, isPending } = authClient.useSession();
+  const {
+  data: session,
+  isPending,
+ 
+} = authClient.useSession();
 
- const user=data?.user
- console.log(user)
+console.log("SESSION:", session);
+console.log("USER:", session?.user);
+
+console.log("LOADING:", isPending);
+
+const user = session?.user;
   
  const role = user?.role as string
  console.log(role)
