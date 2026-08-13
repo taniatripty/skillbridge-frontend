@@ -25,7 +25,7 @@
 //   const [loading, setLoading] = useState(false);
 
 //   useEffect(() => {
-//     fetch("http://localhost:8080/api/v1/categories")
+//     fetch("https://skillbridge-backend-nine.vercel.app/api/v1/categories")
 //       .then((res) => res.json())
 //       .then((data) => setCategories(data.data))
 //       .catch(() => toast.error("Failed to load categories"));
@@ -182,9 +182,7 @@ export default function BecomeTutorForm({
 
   const toggleCategory = (name: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(name)
-        ? prev.filter((c) => c !== name)
-        : [...prev, name],
+      prev.includes(name) ? prev.filter((c) => c !== name) : [...prev, name],
     );
   };
 
@@ -300,11 +298,7 @@ export default function BecomeTutorForm({
           </div>
         </div>
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={loading}
-        >
+        <Button type="submit" className="w-full" disabled={loading}>
           {loading ? "Submitting..." : "Become a Tutor"}
         </Button>
       </form>

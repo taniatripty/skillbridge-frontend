@@ -6,7 +6,9 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://skillbridge-backend-nine.vercel.app";
 
 export default function CreateCategory() {
   const [name, setName] = useState("");
