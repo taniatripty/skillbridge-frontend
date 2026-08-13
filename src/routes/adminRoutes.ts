@@ -11,6 +11,10 @@ export const adminRoutes:Route[]=[
           url: "/admin-dashboard",
         },
         {
+          title: "Manage Profile",
+          url: "/admin-dashboard/manageProfile",
+        },
+        {
           title: "All users",
           url: "/admin-dashboard/user",
         },
